@@ -6,7 +6,7 @@
 
 > ⚠️ **上传/使用前必读**：本 EFI 中带有我的 SMBIOS 序列号等个人化信息。**使用前请务必用 [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) 重新生成** `PlatformInfo → Generic` 下的 `SystemSerialNumber` / `MLB` / `SystemUUID`（ROM 可用随机值），否则有被苹果封号风险且两台机器序列号冲突。
 
-> 🔧 **UTBMap.kext（USB 端口映射）必须自行重做**：三份 EFI 里的 `UTBMap.kext` 都是我在**自己这台 FX86FE** 上逐口插拔实测出来的映射表，写死了本机的端口号与端口类型。**换任何一台机器（哪怕是同型号）直接套用，都会出现 USB 口失效、设备不识别、睡眠被 USB 唤醒等异常。** 正确做法：用 [USBToolBox](https://github.com/USBToolBox/tool) 在你自己的机器上重新生成 `UTBMap.kext` 并替换（保留 `USBToolBox.kext` 不变），详见 §四.7。
+> 🔧 **UTBMap.kext（USB 端口映射）必须自行重做**：三份 EFI 里的 `UTBMap.kext` 都是我在**自己这台 FX86FE** 上逐口插拔实测出来的映射表，写死了本机的端口号与端口类型。**换任何一台机器（哪怕是同型号）直接套用，都会出现 USB 口失效、设备不识别、睡眠被 USB 唤醒等异常。** 正确做法：用 [USBToolBox](https://github.com/USBToolBox/tool) 在你自己的机器上重新生成 `UTBMap.kext` 并替换（保留 `USBToolBox.kext` 不变），详见 §五.7。
 
 ---
 
@@ -22,7 +22,7 @@
 
 - `AirportItlwm`：14 用 2.3.0（`MaxKernel 23.99.99`）、15 用 24.x（`MaxKernel 24.99.99`）、26 用 2.4.0-alpha（`MinKernel 25.0.0`），区间不重叠，拿错版本 Wi-Fi 直接不加载
 - 声卡：26 起 `AppleHDA` 被移除，必须靠 `SimpleHDA.kext`，14/15 不需要（靠 AppleALC 即可）
-- SMBIOS：14/15 用 `MacBookPro15,1` 或 `15,2`、26 必须 `MacBookPro16,1`（Tahoe 已淘汰 15,x 机型）
+- SMBIOS：14 为 `MacBookPro15,1`、15 为 `MacBookPro15,2`、26 必须 `MacBookPro16,1`（Tahoe 已淘汰 15,x 机型）
 - boot-args：仅 26 需要 `revpatch=sbvmm` + `-ibtcompatbeta` + `-igfxblt` + `-igfxbls`
 
 ## 二、适配机型
